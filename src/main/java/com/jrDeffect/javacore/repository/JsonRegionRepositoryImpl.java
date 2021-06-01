@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
 
-public class JsonRegionRepositoryImpl implements RegionRepository {○
+public class JsonRegionRepositoryImpl implements RegionRepository {
 
     private final Gson gson = new Gson();
     private final String REGION_FILE_PATH = "./src/main/resources/regions.json";
