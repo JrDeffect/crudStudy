@@ -1,4 +1,6 @@
 package com.jrDeffect.javacore.repository;
 
-public class WriterRepository {
+import com.jrDeffect.javacore.model.Writer;
+
+public interface WriterRepository extends GenericRepository<Writer, Long>{
 }

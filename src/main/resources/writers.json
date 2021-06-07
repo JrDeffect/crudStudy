@@ -1,3 +1,23 @@
-{
-
-}
+[
+  {
+    "id": 13,
+    "firstName": "Ivan",
+    "lastName": "Ivanov",
+    "posts": "letter",
+    "region": "Vitebsk"
+  },
+  {
+    "id": 13,
+    "firstName": "Ira",
+    "lastName": "Neonova",
+    "posts": "gsff",
+    "region": "Grodno"
+  },
+  {
+    "id": 13,
+    "firstName": "Oleg",
+    "lastName": "Petrov",
+    "posts": "qwer",
+    "region": "Minsk"
+  }
+]

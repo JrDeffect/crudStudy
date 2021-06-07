@@ -8,5 +8,8 @@ public class Main {
         JsonRegionRepositoryImpl jsonRegRepoImpl = new JsonRegionRepositoryImpl();
         jsonRegRepoImpl.getAll();
         System.out.println(jsonRegRepoImpl.getAll());
+        jsonRegRepoImpl.deleteById(666L);
+
+
     }
 }

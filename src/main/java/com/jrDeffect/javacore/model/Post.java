@@ -3,23 +3,24 @@ package com.jrDeffect.javacore.model;
 import java.util.Objects;
 
 public class Post {
-    private int id;
+    private Long id;
     private String content;
     private boolean created;
     private boolean updated;
 
-    public Post(int id, String content, boolean created, boolean updated) {
+
+    public Post(Long id, String content, boolean created, boolean updated) {
         this.id = id;
         this.content = content;
         this.created = created;
         this.updated = updated;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

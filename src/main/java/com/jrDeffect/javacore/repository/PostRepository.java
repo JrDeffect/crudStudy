@@ -1,4 +1,6 @@
 package com.jrDeffect.javacore.repository;
 
-public class PostRepository {
+import com.jrDeffect.javacore.model.Post;
+
+public interface PostRepository extends GenericRepository<Post, Long>{
 }
