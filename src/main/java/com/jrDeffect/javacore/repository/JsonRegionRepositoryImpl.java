@@ -1,40 +1,33 @@
 package com.jrDeffect.javacore.repository;
 
 import com.google.gson.Gson;
-
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import com.jrDeffect.javacore.model.Region;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
-
 
 public class JsonRegionRepositoryImpl implements RegionRepository {
 
     private final Gson gson = new Gson();
     private final String REGION_FILE_PATH = "./src/main/resources/regions.json";
 
-
     @Override
     public Region getById(Long id) {
-
-        return getAllRegionsInternal().stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
+        return getAllRegionsInternal().stream().filter(
+                r -> r.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
     public List<Region> getAll() {
-
         return getAllRegionsInternal();
     }
 

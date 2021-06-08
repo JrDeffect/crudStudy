@@ -1,16 +1,19 @@
 package com.jrDeffect.javacore.repository;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.jrDeffect.javacore.model.Post;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.List;
 
-public class JsonPostRepositoryImpl implements PostRepository{
+public class JsonPostRepositoryImpl implements PostRepository {
 
     private final Gson gson = new Gson();
     private final String POST_FILE_PATH = "./src/main/resources/posts.json";
@@ -39,20 +42,40 @@ public class JsonPostRepositoryImpl implements PostRepository{
 
     @Override
     public Post save(Post post) {
-
-        return null;
+        List<Post> posts = getAllPostsInternal();
+        posts.add(post);
+        try (Writer jsonWriter = new FileWriter(POST_FILE_PATH)) {
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(posts, jsonWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return post;
     }
 
     @Override
     public Post update(Post post) {
-        return null;
+        List<Post> posts = getAllPostsInternal();
+
+        try (Writer jsonWriter = new FileWriter(POST_FILE_PATH)) {
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(posts, jsonWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return post;
     }
 
     @Override
     public void deleteById(Long id) {
 
         List<Post> posts = getAllPostsInternal();
-        posts.removeIf(r -> r.getId().equals(id)); //TODO: write to file
-
+        posts.removeIf(r -> r.getId().equals(id));
+        try (Writer jsonWriter = new FileWriter(POST_FILE_PATH)) {
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(posts, jsonWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class Writer {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private List<Post> posts;
     private Region region;
 
-    public Writer(int id, String firstName, String lastName, List<Post> posts, Region region) {
+    public Writer(Long id, String firstName, String lastName, List<Post> posts, Region region) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,11 +18,11 @@ public class Writer {
         this.region = region;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
