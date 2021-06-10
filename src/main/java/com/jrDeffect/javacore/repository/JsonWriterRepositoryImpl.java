@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.jrDeffect.javacore.model.Region;
 import com.jrDeffect.javacore.model.Writer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -49,21 +50,34 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        writerWriter();
         return writer;
     }
 
     @Override
     public Writer update(Writer writer) {
         List<Writer> writers = getAllWritersInternal();
+        for (Writer writerItr : writers) {
+            if (writerItr.getId().equals(writer.getId())) {
+                writerItr.setFirstName((writer.getFirstName()));
+                writerItr.setLastName((writer.getLastName()));
+                writerItr.setPosts((writer.getPosts()));
+                writerItr.setRegion((writer.getRegion()));
+            }
+        }
+        writerWriter();
+        return writer;
+    }
 
+    private void writerWriter(){
+        List<Writer> writers = getAllWritersInternal();
         try (FileWriter fileWriter = new FileWriter(WRITER_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(writers, fileWriter);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return writer;
+
     }
 
     @Override

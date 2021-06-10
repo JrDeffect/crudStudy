@@ -57,16 +57,25 @@ public class JsonRegionRepositoryImpl implements RegionRepository {
     @Override
     public Region update(Region region) {
         List<Region> regions = getAllRegionsInternal();
+        for (Region regItr : regions) {
+            if (regItr.getId().equals(region.getId())) {
+                regItr.setName((region.getName()));
+            }
+        }
+        regionWrite();
+        return region;
+    }
 
+    private void regionWrite() {
+        List<Region> regions = getAllRegionsInternal();
         try (FileWriter fileWriter = new FileWriter(REGION_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(regions, fileWriter);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return region;
     }
+
 
     @Override
     public void deleteById(Long id) {

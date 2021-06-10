@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.jrDeffect.javacore.model.Post;
+import com.jrDeffect.javacore.model.Region;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -20,13 +22,12 @@ public class JsonPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post getById(Long id) {
-
-        return getAllPostsInternal().stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
+        return getAllPostsInternal().stream().filter(
+                r -> r.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
     public List<Post> getAll() {
-
         return getAllPostsInternal();
     }
 
@@ -50,20 +51,32 @@ public class JsonPostRepositoryImpl implements PostRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        postWrite();
         return post;
     }
 
     @Override
     public Post update(Post post) {
         List<Post> posts = getAllPostsInternal();
+        for (Post postItr : posts) {
+            if (postItr.getId().equals(post.getId())) {
+                postItr.setContent((post.getContent()));
+                postItr.setCreated((post.isCreated()));
+                postItr.setUpdated((post.isUpdated()));
+            }
+        }
+        postWrite();
+        return post;
+    }
 
-        try (Writer jsonWriter = new FileWriter(POST_FILE_PATH)) {
+    private void postWrite() {
+        List<Post> posts = getAllPostsInternal();
+        try (FileWriter jsonWriter = new FileWriter(POST_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(posts, jsonWriter);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return post;
     }
 
     @Override

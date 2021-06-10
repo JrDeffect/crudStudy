@@ -1,1 +1,14 @@
-[{"id":13,"name":"Mogilev"},{"id":299,"name":"Brest"},{"id":73,"name":"Gomel"}]
+[
+  {
+    "id": 13,
+    "name": "Mogilev"
+  },
+  {
+    "id": 299,
+    "name": "Brest"
+  },
+  {
+    "id": 73,
+    "name": "Gomel"
+  }
+]
