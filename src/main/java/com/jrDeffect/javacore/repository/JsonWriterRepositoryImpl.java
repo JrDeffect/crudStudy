@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.jrDeffect.javacore.model.Region;
 import com.jrDeffect.javacore.model.Writer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -77,7 +76,6 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
