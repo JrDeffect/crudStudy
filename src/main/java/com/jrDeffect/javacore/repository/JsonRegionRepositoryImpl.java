@@ -11,7 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
 
 import com.google.gson.reflect.TypeToken;
 
@@ -44,7 +46,12 @@ public class JsonRegionRepositoryImpl implements RegionRepository {
     @Override
     public Region save(Region region) {
         List<Region> regions = getAllRegionsInternal();
+
+        Long newMaxRegionId = regions.stream().map(Region::getId)
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
+        region.setId(newMaxRegionId);
         regions.add(region);
+
         try (Writer jsonWriter = new FileWriter(REGION_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(regions, jsonWriter);

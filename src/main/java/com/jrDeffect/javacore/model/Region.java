@@ -7,6 +7,9 @@ public class Region {
     private Long id;
     private String name;
 
+    public Region() {
+    }
+
     public Region(Long id, String name) {
         this.id = id;
         this.name = name;

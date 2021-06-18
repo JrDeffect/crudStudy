@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface GenericRepository<T, ID> {
 
-    T getById(Long id) throws FileNotFoundException;
+    T getById(Long id);
     List<T> getAll();
     T save(T t);
     T update(T t);

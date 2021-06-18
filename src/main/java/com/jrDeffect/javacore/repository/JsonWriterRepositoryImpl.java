@@ -45,7 +45,6 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
         try (FileWriter fileWriter = new FileWriter(WRITER_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(writers, fileWriter);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
