@@ -5,11 +5,13 @@ import java.util.Objects;
 public class Post {
     private Long id;
     private String content;
-    private boolean created;
-    private boolean updated;
+    private Long created;
+    private Long updated;
 
+    public Post(){
+    }
 
-    public Post(Long id, String content, boolean created, boolean updated) {
+    public Post(Long id, String content, Long created, Long updated) {
         this.id = id;
         this.content = content;
         this.created = created;
@@ -32,19 +34,19 @@ public class Post {
         this.content = content;
     }
 
-    public boolean isCreated() {
+    public Long getCreated() {
         return created;
     }
 
-    public void setCreated(boolean created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 
-    public boolean isUpdated() {
+    public Long getUpdated() {
         return updated;
     }
 
-    public void setUpdated(boolean updated) {
+    public void setUpdated(Long updated) {
         this.updated = updated;
     }
 

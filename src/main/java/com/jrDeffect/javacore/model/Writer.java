@@ -10,6 +10,9 @@ public class Writer {
     private List<Post> posts;
     private Region region;
 
+    public Writer(){
+    }
+
     public Writer(Long id, String firstName, String lastName, List<Post> posts, Region region) {
         this.id = id;
         this.firstName = firstName;

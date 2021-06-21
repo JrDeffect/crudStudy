@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class JsonWriterRepositoryImpl implements WriterRepository {
@@ -41,6 +42,10 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
     @Override
     public Writer save(Writer writer) {
         List<Writer> writers = getAllWritersInternal();
+
+        Long newMaxWriterId = writers.stream().map(Writer::getId)
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
+        writer.setId(newMaxWriterId);
         writers.add(writer);
         try (FileWriter fileWriter = new FileWriter(WRITER_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();

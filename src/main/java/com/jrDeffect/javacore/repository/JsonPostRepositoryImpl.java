@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class JsonPostRepositoryImpl implements PostRepository {
@@ -44,6 +45,10 @@ public class JsonPostRepositoryImpl implements PostRepository {
     @Override
     public Post save(Post post) {
         List<Post> posts = getAllPostsInternal();
+
+        Long newMaxPostId = posts.stream().map(Post::getId)
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
+        post.setId(newMaxPostId);
         posts.add(post);
         try (Writer jsonWriter = new FileWriter(POST_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
@@ -61,8 +66,8 @@ public class JsonPostRepositoryImpl implements PostRepository {
         for (Post postItr : posts) {
             if (postItr.getId().equals(post.getId())) {
                 postItr.setContent((post.getContent()));
-                postItr.setCreated((post.isCreated()));
-                postItr.setUpdated((post.isUpdated()));
+                postItr.setCreated((post.getCreated()));
+                postItr.setUpdated((post.getUpdated()));
             }
         }
         postWrite();
