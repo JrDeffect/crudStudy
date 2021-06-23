@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.jrDeffect.javacore.model.Post;
 import com.jrDeffect.javacore.model.Writer;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -39,13 +41,17 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
         }
     }
 
+    private Long writerMaxId() {
+        List<Writer> writers = getAllWritersInternal();
+        return writers.stream().map(Writer::getId)
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
+    }
+
     @Override
     public Writer save(Writer writer) {
         List<Writer> writers = getAllWritersInternal();
-
-        Long newMaxWriterId = writers.stream().map(Writer::getId)
-                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
-        writer.setId(newMaxWriterId);
+        Long generatedId = writerMaxId();
+        writer.setId(generatedId);
         writers.add(writer);
         try (FileWriter fileWriter = new FileWriter(WRITER_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
@@ -72,7 +78,7 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
         return writer;
     }
 
-    private void writerWriter(){
+    private void writerWriter() {
         List<Writer> writers = getAllWritersInternal();
         try (FileWriter fileWriter = new FileWriter(WRITER_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();

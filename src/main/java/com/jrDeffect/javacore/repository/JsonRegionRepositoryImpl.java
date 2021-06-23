@@ -43,7 +43,6 @@ public class JsonRegionRepositoryImpl implements RegionRepository {
         }
     }
 
-
     private Long regionMaxId() {
         List<Region> regions = getAllRegionsInternal();
         return regions.stream().map(Region::getId)
@@ -56,6 +55,7 @@ public class JsonRegionRepositoryImpl implements RegionRepository {
         List<Region> regions = getAllRegionsInternal();
         Long generatedId = regionMaxId();
         region.setId(generatedId);
+        regions.add(region);
         try (Writer jsonWriter = new FileWriter(REGION_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(regions, jsonWriter);

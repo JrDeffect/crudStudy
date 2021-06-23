@@ -10,11 +10,11 @@ public class RegionController{
 
    private final RegionRepository jsonRegionRepository = new JsonRegionRepositoryImpl();
 
-    Region getById(Long id) {
+    public Region getById(Long id) {
         return jsonRegionRepository.getById(id);
     }
 
-    List<Region> getAll(){
+    public List<Region> getAll(){
         return jsonRegionRepository.getAll();
     }
 
@@ -28,7 +28,7 @@ public class RegionController{
         return jsonRegionRepository.update(region);
     }
 
-    void deleteById(Long id){
+     public void deleteById(Long id){
         jsonRegionRepository.deleteById(id);
     }
 }

@@ -42,13 +42,17 @@ public class JsonPostRepositoryImpl implements PostRepository {
         }
     }
 
+    private Long postMaxId() {
+        List<Post> posts = getAllPostsInternal();
+        return posts.stream().map(Post::getId)
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
+    }
+
     @Override
     public Post save(Post post) {
         List<Post> posts = getAllPostsInternal();
-
-        Long newMaxPostId = posts.stream().map(Post::getId)
-                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
-        post.setId(newMaxPostId);
+        Long generatedId = postMaxId();
+        post.setId(generatedId);
         posts.add(post);
         try (Writer jsonWriter = new FileWriter(POST_FILE_PATH)) {
             Gson gson = new GsonBuilder().create();
