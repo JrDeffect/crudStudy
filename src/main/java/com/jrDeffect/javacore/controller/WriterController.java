@@ -1,7 +1,7 @@
 package com.jrDeffect.javacore.controller;
 
 import com.jrDeffect.javacore.model.Writer;
-import com.jrDeffect.javacore.repository.JsonWriterRepositoryImpl;
+import com.jrDeffect.javacore.repository.gson.JsonWriterRepositoryImpl;
 import com.jrDeffect.javacore.repository.WriterRepository;
 
 import java.util.List;
@@ -22,8 +22,11 @@ public class WriterController {
         return jsonWriteRepository.save(writer);
     }
 
-    public Writer update (Long id, String firstName , String lastName){
+    public Writer update (Long id, String firstName, String lastName){
         Writer writer = new Writer();
+        writer.setId(id);
+        writer.setFirstName(firstName);
+        writer.setLastName(lastName);
         return jsonWriteRepository.update(writer);
     }
 

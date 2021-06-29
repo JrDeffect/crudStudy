@@ -1,7 +1,7 @@
 package com.jrDeffect.javacore.controller;
 
 import com.jrDeffect.javacore.model.Post;
-import com.jrDeffect.javacore.repository.JsonPostRepositoryImpl;
+import com.jrDeffect.javacore.repository.gson.JsonPostRepositoryImpl;
 import com.jrDeffect.javacore.repository.PostRepository;
 
 
@@ -21,11 +21,14 @@ public class PostController {
 
     public Post create(String content){
         Post post = new Post();
+        post.setContent(content);
         return jsonPostRepository.save(post);
     }
 
     public Post update (Long id, String content){
         Post post = new Post();
+        post.setId(id);
+        post.setContent(content);
         return jsonPostRepository.update(post);
     }
 

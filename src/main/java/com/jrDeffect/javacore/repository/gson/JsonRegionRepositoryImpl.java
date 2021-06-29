@@ -1,4 +1,4 @@
-package com.jrDeffect.javacore.repository;
+package com.jrDeffect.javacore.repository.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 import com.google.gson.reflect.TypeToken;
+import com.jrDeffect.javacore.repository.RegionRepository;
 
 public class JsonRegionRepositoryImpl implements RegionRepository {
 
@@ -46,8 +46,7 @@ public class JsonRegionRepositoryImpl implements RegionRepository {
     private Long regionMaxId() {
         List<Region> regions = getAllRegionsInternal();
         return regions.stream().map(Region::getId)
-                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
-
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L) + 1;
     }
 
     @Override
@@ -86,7 +85,6 @@ public class JsonRegionRepositoryImpl implements RegionRepository {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void deleteById(Long id) {

@@ -4,11 +4,15 @@
     "name": "Mogilev"
   },
   {
-    "id": 299,
+    "id": 2,
     "name": "Brest"
   },
   {
-    "id": 73,
+    "id": 11,
     "name": "Gomel"
+  },
+  {
+    "id": 5,
+    "name": "www"
   }
 ]

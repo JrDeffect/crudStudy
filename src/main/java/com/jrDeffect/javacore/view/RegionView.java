@@ -10,14 +10,14 @@ public class RegionView {
 
     private final RegionController regionController = new RegionController();
 
-    Region getRegionId(){
+    public Region getRegionId(){
         Scanner scanReg = new Scanner(System.in);
         System.out.println("Enter id: ");
         Long inputId = scanReg.nextLong();
         return regionController.getById(inputId);
     }
 
-     List<Region> getAllRegions() {
+     public List<Region> getAllRegions() {
         Scanner scanReg = new Scanner(System.in);
         System.out.println("Enter 1 for a list of all regions : ");
         Long inputId = scanReg.nextLong();
@@ -47,7 +47,7 @@ public class RegionView {
         System.out.println(updatedRegion);
     }
 
-    void delete() {
+    public void delete() {
         Scanner scanReg = new Scanner(System.in);
         System.out.println("Enter id: ");
         Long inputId = scanReg.nextLong();

@@ -1,12 +1,11 @@
-package com.jrDeffect.javacore.repository;
+package com.jrDeffect.javacore.repository.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.jrDeffect.javacore.model.Post;
 import com.jrDeffect.javacore.model.Writer;
-
+import com.jrDeffect.javacore.repository.WriterRepository;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -44,7 +43,7 @@ public class JsonWriterRepositoryImpl implements WriterRepository {
     private Long writerMaxId() {
         List<Writer> writers = getAllWritersInternal();
         return writers.stream().map(Writer::getId)
-                .max(Comparator.comparing(Long::valueOf)).orElse(1L);
+                .max(Comparator.comparing(Long::valueOf)).orElse(1L) + 1;
     }
 
     @Override
